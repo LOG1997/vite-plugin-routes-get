@@ -1,0 +1,53 @@
+[
+    {
+        "path": "/about",
+        "name": "About",
+        "component": "() => import(@/views/About/index.tsx)",
+        "children": [
+            {
+                "path": "/about/abouthe",
+                "name": "AboutHe",
+                "component": "() => import(@/views/About/AboutHe/index.tsx)",
+                "children": [],
+                "parent": "About"
+            },
+            {
+                "path": "/about/aboutme",
+                "name": "AboutMe",
+                "component": "() => import(@/views/About/AboutMe/index.tsx)",
+                "children": [],
+                "parent": "About"
+            }
+        ],
+        "parent": "views"
+    },
+    {
+        "path": "/concat",
+        "name": "Concat",
+        "component": "() => import(@/views/Concat/index.tsx)",
+        "children": [],
+        "parent": "views"
+    },
+    {
+        "path": "/heart",
+        "name": "Heart",
+        "component": "() => import(@/views/Heart/index.tsx)",
+        "children": [
+            {
+                "path": "/heart/heart1",
+                "name": "Heart1",
+                "component": "() => import(@/views/Heart/Heart1/index.tsx)",
+                "children": [],
+                "parent": "Heart"
+            }
+        ],
+        "parent": "views"
+    },
+    {
+        "path": "/home",
+        "name": "Home",
+        "component": "() => import(@/views/Home/index.tsx)",
+        "children": [],
+        "parent": "views"
+    }
+]
