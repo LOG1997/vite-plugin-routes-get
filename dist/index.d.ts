@@ -1,2 +1,5 @@
+import { PluginOption } from 'vite';
 
-export { }
+declare function vitePluginRouteGet(): PluginOption;
+
+export { vitePluginRouteGet as default };

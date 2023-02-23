@@ -53,7 +53,7 @@ var getRoutesArr = (dirName, parentItem, currentPath, defaultFile = "index") => 
       routes.push({
         path: pathItem.substring(pathItem.indexOf("/")),
         name: item,
-        component: `() => import(@/${parentItem}/${item}/${defaultFile}.tsx)`,
+        componentPath: `../${parentItem}/${item}`,
         children: [],
         parent: dirName
       });
@@ -87,43 +87,25 @@ var getRoutes = (dirName, parentItem, currentPath, defaultFile = "index") => {
   );
   return arrayToTree(adp, dirName);
 };
-var writeRouteFile = (path3, routes2) => {
-  import_fs.default.writeFileSync(path3, JSON.stringify(routes2));
-};
 
 // src/index.ts
-var __dirname = import_path2.default.resolve();
+var __dirname = import_path2.default.resolve("src");
+console.log("\u{1F601}__dirname:", __dirname);
 function vitePluginRouteGet() {
+  const virtualModuleId = "virtual:routes-get";
+  const resolvedVirtualModuleId = "\0" + virtualModuleId;
   return {
-    // 插件名称
-    name: "vite-plugin-routes-get",
-    // pre 会较于 post 先执行
-    enforce: "pre",
-    // post
-    // 指明它们仅在 'build' 或 'serve' 模式时调用
-    apply: "build",
-    // apply 亦可以是一个函数
-    config(config, { command }) {
-      console.log("\u8FD9\u91CC\u662Fconfig\u94A9\u5B50");
+    name: "vite-plugin-route-get",
+    resolveId(id) {
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId;
+      }
     },
-    // 5. 构建阶段的通用钩子：在服务器启动时被调用：每次开始构建时调用
-    buildStart(options) {
-      console.log("\u{1F615}options:", __dirname);
-      const currentPath = import_path2.default.resolve(__dirname, "./src");
-      const routerPath = import_path2.default.resolve(__dirname, "./src/router/routes_config.txt");
-      let routesRes = [];
-      routesRes = getRoutes("views", "", currentPath, "index");
-      writeRouteFile(routerPath, routesRes);
-      console.log("\u{1F60B}routesRes:", routesRes);
-    },
-    configResolved(resolvedConfig) {
-      console.log("\u8FD9\u91CC\u662FconfigResolved\u94A9\u5B50");
-    },
-    configureServer(server) {
-      console.log("\u8FD9\u91CC\u662FconfigureServer\u94A9\u5B50");
-    },
-    transformIndexHtml(html) {
-      console.log("\u8FD9\u91CC\u662FtransformIndexHtml\u94A9\u5B50");
+    load(id) {
+      if (id === resolvedVirtualModuleId) {
+        const routes2 = getRoutes("views", "", __dirname, "index");
+        return `export const routeGet = ${JSON.stringify(routes2)}`;
+      }
     }
   };
 }

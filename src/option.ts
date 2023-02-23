@@ -27,7 +27,7 @@ const getRoutesArr = (
             routes.push({
                 path: pathItem.substring(pathItem.indexOf("/")),
                 name: item,
-                component: `() => import(@/${parentItem}/${item}/${defaultFile}.tsx)`,
+                componentPath: `../${parentItem}/${item}`,
                 children: [],
                 parent: dirName,
             })
