@@ -1,7 +1,6 @@
 import React from 'react'
-
 export default function index() {
     return (
-        <div>aboutHasdsdsdasdHaaHHHHHME</div>
+        <div>inde12312x ttt11t</div>
     )
 }

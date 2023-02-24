@@ -16,7 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm run build --watch --ignore-watch example",
     "build": "tsup src/index.ts --dts --format cjs,esm",
-    "example:react": "cd example/react-project && pnpm run build",
+    "example:react": "cd example/react-project && pnpm run dev",
     "example:vue3": "cd example/vue3-project && pnpm run build"
   },
   "keywords": [],

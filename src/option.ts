@@ -1,8 +1,10 @@
-import fs from "fs"
+import fs, { Dirent } from "fs"
 import path from "path"
+import { isFile, isDir, getFiles } from "./utils/node"
 // console.log("__dirnamepackage:", __dirname)
 // const currentPath = path.resolve(__dirname, "..")
-const routes: object[] = []
+let fileCount = 0;
+let routes: object[] = []
 const getRoutesArr = (
     dirName: string,
     parentItem: string,
@@ -68,12 +70,26 @@ export const getRoutes = (
         currentPath,
         defaultFile,
     );
+    routes = [];
     return arrayToTree(adp, dirName)
 }
 
-// 写入文件
-
-
-export const writeRouteFile = (path: string, routes: any[]) => {
-    fs.writeFileSync(path, JSON.stringify(routes));
+//统计文件个数
+export const countFile = (dir: string) => {
+    const filesArr = getFiles(dir);
+    filesArr.forEach((item: Dirent) => {
+        if (isDir(dir + '\\' + item.name)) {
+            countFile(dir + '\\' + item.name + "/");
+        }
+        else if (isFile(dir + '\\' + item.name) && item.name.includes(".tsx")) {
+            fileCount++;
+        }
+        else {
+            return
+        }
+    })
+    return fileCount;
+}
+export const initFileCount = () => {
+    fileCount = 0;
 }
