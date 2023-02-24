@@ -19,7 +19,11 @@
     "example:react": "cd example/react-project && pnpm run dev",
     "example:vue3": "cd example/vue3-project && pnpm run build"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "routes",
+    "auto get route"
+  ],
   "author": "log1997",
   "license": "MIT",
   "peerDependencies": {

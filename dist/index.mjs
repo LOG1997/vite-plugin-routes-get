@@ -114,25 +114,26 @@ function vitePluginRouteGet() {
     },
     handleHotUpdate(ctx) {
       const { server } = ctx;
+      const relationModule = [...server.moduleGraph.getModulesByFile("\0virtual:routes-get")][0];
       const fileCountNow = countFile(__dirname + "/views");
       if (fileCountNow !== fileCountPre) {
         fileCountPre = fileCountNow;
+        server.ws.send({
+          type: "update",
+          updates: [
+            {
+              type: "js-update",
+              path: relationModule.file,
+              acceptedPath: relationModule.file,
+              timestamp: (/* @__PURE__ */ new Date()).getTime()
+            }
+          ]
+        });
         initFileCount();
+        return [relationModule];
       }
       initFileCount();
-      const relationModule = [...server.moduleGraph.getModulesByFile("\0virtual:routes-get")][0];
-      server.ws.send({
-        type: "update",
-        updates: [
-          {
-            type: "js-update",
-            path: relationModule.file,
-            acceptedPath: relationModule.file,
-            timestamp: (/* @__PURE__ */ new Date()).getTime()
-          }
-        ]
-      });
-      return [relationModule];
+      return [];
     }
   };
 }

@@ -35,37 +35,30 @@ export default function vitePluginRouteGet(): PluginOption {
         },
         handleHotUpdate(ctx) {
             const { server } = ctx;
-            // console.log('😕ctx:', ctx)
+
+            const relationModule = [...server.moduleGraph.getModulesByFile('\x00virtual:routes-get')!][0];
             const fileCountNow = countFile(__dirname + '/views')
             if (fileCountNow !== fileCountPre) {
                 fileCountPre = fileCountNow;
-                // routes = [];
-                // routes = getRoutes('views', '', __dirname, 'index')
-                // return `export const msg = "from virtual module"`
-
+                server.ws.send({
+                    type: 'update',
+                    updates: [
+                        {
+                            type: 'js-update',
+                            path: relationModule.file!,
+                            acceptedPath: relationModule.file!,
+                            timestamp: new Date().getTime()
+                        }
+                    ]
+                });
                 initFileCount();
-                // return `export const routeGet = ${JSON.stringify(routes)}`
+
+                return [relationModule]
             }
             initFileCount();
-            // // 找到引入该 md 文件的 vue 文件
-            // const relationId = mdRelationMap.get(file) as string;
-            // // 找到该 vue 文件的 moduleNode
-            const relationModule = [...server.moduleGraph.getModulesByFile('\x00virtual:routes-get')!][0];
-            // // 发送 websocket 消息，进行单文件热重载
-            server.ws.send({
-                type: 'update',
-                updates: [
-                    {
-                        type: 'js-update',
-                        path: relationModule.file!,
-                        acceptedPath: relationModule.file!,
-                        timestamp: new Date().getTime()
-                    }
-                ]
-            });
 
+            return []
             // 指定需要重新编译的模块
-            return [relationModule]
         },
     }
 }

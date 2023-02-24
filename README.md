@@ -1,27 +1,16 @@
 # 自动获取react路由
 
-## 开发
+>每次新增一个页面文件都要去路由文件再配置一次，真的是太烦了！
+所以就写了一个自动获取路由的插件，只要在路由文件中引入一个虚拟模块，就可以自动获取路由了。
 
-### 基本函数
-封装了一个从当前页面文件夹获取路由参数的函数，置于`src/option.ts`文件中，导出函数为`getRoute`，使用方法如下：
-```ts
-import { getRoute } from './option'; 
-const routes = getRoutes('views', '', __dirname, 'index')
-```
-第一个参数：页面文件夹（一般为pages或者views），视项目情况而定
-第二个参数：视项目情况而定，传入为空即可
-第三个参数：`__dirname`，当前项目的src文件夹，如你有一个react项目名为react-project，则`__dirname`为`react-project/src`
-第四个参数：首页文件名，一般为index，视项目情况而定
+> 初学，写得比较菜，欢迎大家指正。
 
-## 打包成vite插件
-
-
-
+> 目前只适配了react
 ## 使用
-### 安装、引入以及使用
+
 安装
 ```bash
-npm i vite-plugin-routes-get
+npm i vite-plugin-routes-get -D
 ```
 在vite配置文件`vite.config.ts`中引入插件并使用，如下：
 ```ts
@@ -53,6 +42,20 @@ export const replaceComponent = (routes: any[]) => {
 }
 ```
 在路由文件中使用
+> 后续将封装一个处理路由的函数，实现全自动导入。
+
+生成路由的格式如下：
+```ts
+[
+  {
+    path: '/home',
+    name: 'Home',
+    component: lazy(() => import('../Home')),
+    children: [],
+    parent: 'views',
+  }
+]
+```
 ```ts
 const autoRoutes = replaceComponent(routeGet);
 const routes = [
