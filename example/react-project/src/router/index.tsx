@@ -14,6 +14,10 @@ const routes = [
         component: lazy(() => import('@/App')),
         auth: false,
     },
+    {
+        path: "/login",
+        component: lazy(() => import('@/views/About')),
+    },
     ...autoRoutes
 ]
 console.log('😔routes:', routes)

@@ -56,6 +56,8 @@ export const replaceComponent = (routes: any[]) => {
   }
 ]
 ```
+
+如果有特殊路由，请一并添加到这个routes数组中
 ```ts
 const autoRoutes = replaceComponent(routeGet);
 const routes = [
@@ -67,7 +69,7 @@ const routes = [
     ...autoRoutes
 ]
 ```
-后面便是生成路由的操作了
+可以放心使用了，后面便是生成路由的操作了
 ```ts
 const generateRouter = (routers: any) => {
     const rout = routers.map((item: any) => {

@@ -37,7 +37,7 @@ var getRoutesArr = (dirName, parentItem, currentPath, defaultFile = "index") => 
       routes.push({
         path: pathItem.substring(pathItem.indexOf("/")),
         name: item,
-        componentPath: `../${parentItem}/${item}`,
+        componentPath: `/src/${parentItem}/${item}`,
         children: [],
         parent: dirName
       });
