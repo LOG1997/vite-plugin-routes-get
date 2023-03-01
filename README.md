@@ -8,7 +8,7 @@
 > 目前只适配了react
 ## 使用
 
-安装
+### 安装和配置
 ```bash
 npm i vite-plugin-routes-get -D
 ```
@@ -23,11 +23,13 @@ export default defineConfig({
 ```
 在路由文件中使用，引入虚拟模块`virtual:routes-get`，如下：
 ```ts
+// @/router/index.tsx
 import { routeGet } from 'virtual:routes-get';
 ```
 处理一下路由参数，因为`virtual:routes-get`中的路由数组的component返回的是一个字符串，需要转换成函数，如下：
-定义一个转换函数
+在`@/router/utils`定义一个转换函数
 ```ts
+// @/router/utils/replaceComponent.ts
 import { lazy } from 'react'
 export const replaceComponent = (routes: any[]) => {
     routes.forEach((item: any) => {
@@ -63,33 +65,33 @@ const autoRoutes = replaceComponent(routeGet);
 const routes = [
     {
         path: "/",
-        component: lazy(() => import('@/App')),
-        auth: false,
+        redirect: <Navigate to="/home" />,
     },
-    ...autoRoutes
-]
+    {
+        component: Layout,
+        children: [
+            ...autoRoutes
+        ]
+    }
+];
 ```
 可以放心使用了，后面便是生成路由的操作了
 ```ts
-const generateRouter = (routers: any) => {
-    const rout = routers.map((item: any) => {
-        if (item.children && item.children.length > 0) {
-            item.children = generateRouter(item.children);
+const generateRoutes = (routes: any) => {
+    return routes.map((item: any) => {
+        if (item.children) {
+            generateRoutes(item.children);
         }
-
-        item.element = <Suspense fallback={<div>等待中</div>}>
-            <item.component />
-        </Suspense>;
-
+        item.redirect ? item.element = item.redirect :
+            item.element = <Suspense fallback={<div>加载中</div>}>
+                <item.component />
+            </Suspense>
 
         return item;
     });
-
-    return rout;
-};
+}
 // 生成路由
 const Router = () => {
-
     return useRoutes(generateRouter(routes));
 };
 ```
