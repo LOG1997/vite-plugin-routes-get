@@ -5,6 +5,11 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LOG1997/vite-plugin-routes-get.git"
+  },
+  "homepage": "https://github.com/LOG1997/vite-plugin-routes-get.git",
   "exports": {
     ".": {
       "require": "./dist/index.js",
