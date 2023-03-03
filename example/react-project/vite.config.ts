@@ -4,7 +4,10 @@ import vitePluginRouteGet from 'vite-plugin-routes-get'
 import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), vitePluginRouteGet()],
+  plugins: [react(), vitePluginRouteGet({
+    dirname: 'views',
+    type: 'react'
+  })],
   server: {
     hmr: {
       overlay: true,

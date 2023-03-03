@@ -1,8 +1,6 @@
 import fs, { Dirent } from "fs"
 import path from "path"
 import { isFile, isDir, getFiles } from "./utils/node"
-// console.log("__dirnamepackage:", __dirname)
-// const currentPath = path.resolve(__dirname, "..")
 let fileCount = 0;
 let routes: object[] = []
 const getRoutesArr = (
@@ -10,6 +8,7 @@ const getRoutesArr = (
     parentItem: string,
     currentPath: string,
     defaultFile = "index",
+    objectType: 'vue' | 'react'
 ) => {
     parentItem ? parentItem : (parentItem = dirName)
     // 引入的文件夹
@@ -29,13 +28,12 @@ const getRoutesArr = (
             routes.push({
                 path: pathItem.substring(pathItem.indexOf("/")),
                 name: item,
-                componentPath: `/src/${parentItem}/${item}`,
+                componentPath: `/src/${parentItem}/${item}/${objectType == 'vue' ? defaultFile + '.vue' : ''}`,
                 children: [],
                 parent: dirName,
             })
             const goParentItem = parentItem + "/" + item
-
-            return getRoutesArr(item, goParentItem, folderPath, defaultFile)
+            return getRoutesArr(item, goParentItem, folderPath, defaultFile, objectType)
         }
         else {
             console.log('not folder')
@@ -63,12 +61,14 @@ export const getRoutes = (
     parentItem: string,
     currentPath: string,
     defaultFile = "index",
+    objectType: 'vue' | 'react'
 ) => {
     const adp = getRoutesArr(
         dirName,
         parentItem,
         currentPath,
         defaultFile,
+        objectType
     );
     routes = [];
     return arrayToTree(adp, dirName)
@@ -81,7 +81,7 @@ export const countFile = (dir: string) => {
         if (isDir(dir + '\\' + item.name)) {
             countFile(dir + '\\' + item.name + "/");
         }
-        else if (isFile(dir + '\\' + item.name) && item.name.includes(".tsx")) {
+        else if (isFile(dir + '\\' + item.name) && (item.name.includes(".tsx") || item.name.includes(".vue"))) {
             fileCount++;
         }
         else {
