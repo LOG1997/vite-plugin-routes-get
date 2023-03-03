@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-routes-get",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "route auto get",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
