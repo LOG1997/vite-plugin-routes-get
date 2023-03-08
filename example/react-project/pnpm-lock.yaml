@@ -10,6 +10,7 @@ specifiers:
   react-router-dom: ^6.8.1
   typescript: ^4.9.3
   vite: link:../../node_modules/vite
+  vite-plugin-project-info: ^0.5.0
   vite-plugin-routes-get: link:../../
 
 dependencies:
@@ -21,9 +22,10 @@ dependencies:
 devDependencies:
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
-  '@vitejs/plugin-react': 3.1.0_vite@..+node_modules+vite
+  '@vitejs/plugin-react': 3.1.0
   typescript: 4.9.5
   vite: link:../../node_modules/vite
+  vite-plugin-project-info: 0.5.0
   vite-plugin-routes-get: link:../..
 
 packages:
@@ -328,7 +330,7 @@ packages:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: true
 
-  /@vitejs/plugin-react/3.1.0_vite@..+node_modules+vite:
+  /@vitejs/plugin-react/3.1.0:
     resolution: {integrity: sha512-AfgcRL8ZBhAlc3BFdigClmTUMISmmzHn7sB2h9U1odvc5U/MjWXsAaz18b/WoppUTDBzxOJwo2VdClfUcItu9g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -339,7 +341,6 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.21.0
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: link:../../node_modules/vite
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -773,6 +774,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: true
+
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -983,6 +988,12 @@ packages:
       browserslist: 4.21.5
       escalade: 3.1.1
       picocolors: 1.0.0
+    dev: true
+
+  /vite-plugin-project-info/0.5.0:
+    resolution: {integrity: sha512-LJGzgwL2w+iugLB6wCBJQBBvlLUT5uqEMe7TVwXlf9JfFbaM1O7xldzILpSgTa1qvNZh/I61Xo3GvXJPIJC3QA==}
+    dependencies:
+      moment: 2.29.4
     dev: true
 
   /warning/4.0.3:

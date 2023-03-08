@@ -20,6 +20,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^4.9.3",
     "vite": "link:../../node_modules/vite",
+    "vite-plugin-project-info": "^0.5.0",
     "vite-plugin-routes-get": "link:../../"
   }
 }

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 
 import { BrowserRouter } from "react-router-dom";
 
+// import { routeGet } from 'virtual:routes-get';
 // import 'virtual:routes-get';
 // import { AliveScope } from 'react-activation'
 import { Router } from '@/router'

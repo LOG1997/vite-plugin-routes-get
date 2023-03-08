@@ -21,6 +21,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm run build --watch --ignore-watch example",
     "build": "tsup src/index.ts --dts --format cjs,esm",
+    "build:example-react": "cd example/react-project && pnpm run build",
     "example:react": "cd example/react-project && pnpm run dev",
     "example:vue": "cd example/vue3-project && pnpm run dev"
   },
@@ -42,6 +43,7 @@
     "fs": "0.0.1-security",
     "tsup": "^6.6.3",
     "typescript": "^4.9.5",
-    "vite": "^4.1.4"
+    "vite": "^4.1.4",
+    "vite-plugin-project-info": "^0.5.0"
   }
 }

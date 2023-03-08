@@ -1,13 +1,16 @@
 
 import { useRoutes } from "react-router-dom";
 import { Suspense, lazy } from 'react';
-
-import { routeGet } from 'virtual:routes-get';
+// FIXME:打包时不成功，server模式可行
+// import { msg } from 'virtual:my-module';
 import { replaceComponent } from "@/utils/replaceComponent";
-
-const autoRoutes = replaceComponent(routeGet);
-console.log('😌autoRoutes:', autoRoutes)
+import projectInfo from 'virtual:project-info';
+console.log('😀projectInfo:', projectInfo)
+// const autoRoutes = replaceComponent(routeGet);
+// console.log('😌autoRoutes:', autoRoutes)
 // const routes = routeGet;
+
+// console.log('😅msg:', msg)
 const routes = [
     {
         path: "/",
@@ -18,7 +21,7 @@ const routes = [
         path: "/login",
         component: lazy(() => import('@/views/About')),
     },
-    ...autoRoutes
+    // ...autoRoutes
 ]
 console.log('😔routes:', routes)
 const checkAuth = (routers: any, path: string) => {

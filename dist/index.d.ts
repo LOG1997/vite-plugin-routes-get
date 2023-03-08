@@ -1,10 +1,7 @@
-import { PluginOption } from 'vite';
-
-type UserOptions = {
-    dirname: string;
-    defaultFile: string;
-    type: string;
+declare function myPlugin(): {
+    name: string;
+    resolveId(id: any): string | undefined;
+    load(id: any): "export const msg = \"from virtual module\"" | undefined;
 };
-declare function vitePluginRouteGet(userOptions?: UserOptions): PluginOption;
 
-export { vitePluginRouteGet as default };
+export { myPlugin as default };

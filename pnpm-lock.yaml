@@ -9,6 +9,7 @@ specifiers:
   tsup: ^6.6.3
   typescript: ^4.9.5
   vite: ^4.1.4
+  vite-plugin-project-info: ^0.5.0
 
 devDependencies:
   '@types/node': 18.14.0
@@ -19,6 +20,7 @@ devDependencies:
   tsup: 6.6.3_typescript@4.9.5
   typescript: 4.9.5
   vite: 4.1.4_@types+node@18.14.0
+  vite-plugin-project-info: 0.5.0
 
 packages:
 
@@ -1334,6 +1336,10 @@ packages:
       brace-expansion: 1.1.11
     dev: true
 
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: true
+
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -1751,6 +1757,12 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.3.0
+    dev: true
+
+  /vite-plugin-project-info/0.5.0:
+    resolution: {integrity: sha512-LJGzgwL2w+iugLB6wCBJQBBvlLUT5uqEMe7TVwXlf9JfFbaM1O7xldzILpSgTa1qvNZh/I61Xo3GvXJPIJC3QA==}
+    dependencies:
+      moment: 2.29.4
     dev: true
 
   /vite/4.1.4_@types+node@18.14.0:

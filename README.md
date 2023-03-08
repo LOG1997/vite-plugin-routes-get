@@ -1,5 +1,10 @@
 # 自动生成路由
+
+
+> <p style="color:red">执行build操作的时候不可用，不知道该怎样搞，就是跟vite官网的例子差不多的啊。所以这个模块暂时不可用</p>
+
 > react和vue3皆可使用
+
 
 >每次新增一个页面文件都要去路由文件再配置一次，真的是太烦了！
 所以就写了一个自动获取路由的插件，只要在路由文件中引入一个虚拟模块，就可以自动获取路由了。
@@ -24,9 +29,9 @@ import react from '@vitejs/plugin-react'
 import vitePluginRouteGet from 'vite-plugin-routes-get'
 export default defineConfig({
   plugins: [react(), vitePluginRouteGet(
-   dirname:'views',
+{   dirname:'views',
    defaultFile:'index',
-   type:'react'
+   type:'react'}
   )],
 })
 ```
